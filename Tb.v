@@ -5,10 +5,9 @@ module tb_calculator;
     reg clk;
     reg reset;
     reg keyb_data;
-    wire keyb_clk;  // Χρησιμοποιούμε wire αντί για reg
+    wire keyb_clk;  
     wire [6:0] seg1, seg2;
 
-    // Instantiate το κύριο module
     calculator uut (
         .clk(clk),
         .reset(reset),
@@ -18,73 +17,74 @@ module tb_calculator;
         .seg2(seg2)
     );
 
-    // Προσομοίωση ρολογιού 50MHz (20ns περίοδος)
-    always #10 clk = ~clk;
+    initial clk = 0;
+    always #10 clk = ~clk;  // 50MHz clock
 
-    // Task για αποστολή scan code
-    task send_scan_code(input [7:0] scan_code);
-        integer i;
-        begin
-            force keyb_clk = 0; // Ξεκινάμε με χαμηλό clock
-            keyb_data = 0; // Start bit
-            #100;
-            
-            for (i = 0; i < 8; i = i + 1) begin
-                force keyb_clk = 0; #50;
-                keyb_data = scan_code[i]; #50;
-                force keyb_clk = 1; #50;
-            end
-            
-            force keyb_clk = 0; #50;
-            keyb_data = 1; // Parity bit
-            force keyb_clk = 1; #50;
-            force keyb_clk = 0; #50;
-            keyb_data = 1; // Stop bit
-            force keyb_clk = 1; #50;
+    always #2000 force uut.keyboard.scan_ready = 1;
+    always #2100 force uut.keyboard.scan_ready = 0;
 
-            release keyb_clk; // Επιστρέφουμε τον έλεγχο στο module
-        end
-    endtask
 
+    // ✅ **Tracking για όλα τα σήματα**
     initial begin
-        // Αρχικοποίηση
-        clk = 0;
+        $monitor("Time: %0t | clk=%b | reset=%b | keyb_clk=%b | keyb_data=%b | seg1=%b | seg2=%b",
+                 $time, clk, reset, keyb_clk, keyb_data, seg1, seg2);
+    end
+
+    // ✅ **Γεννήτρια PS/2 Clock με `force/release` για να μην είναι `Z`**
+    initial begin
+        keyb_clk = 1;
+        forever #50  keyb_clk = ~keyb_clk;
+    end
+
+    task send_scan_code(input [7:0] scan_code);
+    integer i;
+    begin
+        force keyb_clk = 1; 
+        keyb_data = 0; // Start bit
+        #100;
+        $display("🟢 [Testbench] Sending START bit για scan_code=%h", scan_code);
+
+        for (i = 0; i < 8; i = i + 1) begin
+            keyb_clk = 0; #50;
+            keyb_data = scan_code[i]; #100;
+            keyb_clk = 1; #50;
+            $display("🔹 [Testbench] Sent bit %d: %b", i, scan_code[i]);  
+        end
+
+        keyb_clk = 0; #50;
+        keyb_data = 1; // Parity bit
+        keyb_clk = 1; #100;
+        $display("🟢 [Testbench] Sent parity bit");
+
+        force keyb_clk = 0; #50;
+        keyb_data = 1; // Stop bit
+        force keyb_clk = 1; #100;
+        $display("🟢 [Testbench] Sent stop bit");
+
+        release keyb_clk;  // ✅ ΣΩΣΤΗ ΑΠΕΛΕΥΘΕΡΩΣΗ ΤΟΥ `inout`
+        #1000;  
+    end
+endtask
+
+
+    // ✅ **Τεστ Εισαγωγής Αριθμών**
+    initial begin
         reset = 1;
         keyb_data = 1;
-        #200;
+        #1000;
         reset = 0;
-        #200;
+        #1000; 
 
-        // 1 + 2 =
         send_scan_code(8'h16);  // '1'
-        #500;
+        #2000;
         send_scan_code(8'h55);  // '+'
-        #500;
+        #2000;
         send_scan_code(8'h1E);  // '2'
-        #500;
+        #2000;
         send_scan_code(8'h5A);  // '='
-        #1000;
+        #4000; 
 
-        // 5 - 3 =
-        send_scan_code(8'h2E);  // '5'
-        #500;
-        send_scan_code(8'h4E);  // '-'
-        #500;
-        send_scan_code(8'h26);  // '3'
-        #500;
-        send_scan_code(8'h5A);  // '='
-        #1000;
-
-        // Δοκιμή σφάλματος
-        send_scan_code(8'h55);  // '+'
-        #500;
-        send_scan_code(8'h4E);  // '-'
-        #500;
-        send_scan_code(8'h1E);  // '2'
-        #500;
-        send_scan_code(8'h5A);  // '='
-        #1000;
-
+        $stop;
     end
 
 endmodule

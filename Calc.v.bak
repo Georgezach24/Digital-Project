@@ -41,14 +41,14 @@ module calculator (
         result <= 0;
         error_flag <= 0;
     end else if (scan_ready) begin  
-        $display("🟢 FSM ΛΑΜΒΑΝΕΙ scan_ready=1! scan_code=%h | state=%b", scan_code, state);
+        $display("🟢 [calculator] FSM ΛΑΜΒΑΝΕΙ scan_ready=1! scan_code=%h | state=%b", scan_code, state);
         case (state)
             2'b00: begin 
                 if (valid) begin
                     operand1 <= digit[3:0];  
                     state <= 2'b01;       
                     error_flag <= 0;       
-                    $display("✅ STATE 00 -> operand1 = %d", operand1);
+                    $display("✅ [calculator] STATE 00 -> operand1 = %d", operand1);
                 end else begin
                     error_flag <= 1;       
                 end
@@ -58,11 +58,11 @@ module calculator (
                 if (scan_code == 8'h4E) begin 
                     operation <= 1;
                     state <= 2'b10;
-                    $display("✅ STATE 01 -> Operation = '-'");
+                    $display("✅ [calculator] STATE 01 -> Operation = '-'");
                 end else if (scan_code == 8'h55) begin 
                     operation <= 0;
                     state <= 2'b10;
-                    $display("✅ STATE 01 -> Operation = '+'");
+                    $display("✅ [calculator] STATE 01 -> Operation = '+'");
                 end else begin
                     error_flag <= 1; 
                 end
@@ -73,7 +73,7 @@ module calculator (
                     operand2 <= digit[3:0];  
                     state <= 2'b11;       
                     error_flag <= 0;
-                    $display("✅ STATE 10 -> operand2 = %d", operand2);
+                    $display("✅ [calculator] STATE 10 -> operand2 = %d", operand2);
                 end else begin
                     error_flag <= 1; 
                 end
@@ -89,7 +89,7 @@ module calculator (
                         else
                             result <= operand1 - operand2;
                         error_flag <= 0;
-                        $display("✅ STATE 11 -> Υπολογισμός ΟΚ: result = %d", result);
+                        $display("✅ [calculator] STATE 11 -> Υπολογισμός ΟΚ: result = %d", result);
                     end
                     state <= 2'b00; 
                 end else begin
@@ -99,6 +99,7 @@ module calculator (
         endcase
     end
 end
+
 
 
 
