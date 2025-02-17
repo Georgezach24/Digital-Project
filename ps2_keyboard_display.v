@@ -14,18 +14,16 @@ module ps2_keyboard_display (
     assign keyb_clk = (keyb_data_reg[0] == 1'b0) ? 1'b0 : 1'b1;
 
 
-    always @(posedge clk or posedge reset) begin
-        if (reset) begin
-            clk_shift_reg <= 6'b000000;
-            keyb_data_reg <= 11'b11111111111;
-        end else begin
-            clk_shift_reg <= {clk_shift_reg[4:0], keyb_clk};
-            
-            if (clk_shift_reg[5:3] == 3'b000 && clk_shift_reg[2:0] == 3'b111) begin
-                keyb_data_reg <= {keyb_data, keyb_data_reg[10:1]};
-            end
-        end
+    always @(negedge keyb_clk or posedge reset) begin
+    if (reset) begin
+        keyb_data_reg <= 11'b11111111111;
+    end else begin
+        keyb_data_reg <= {keyb_data, keyb_data_reg[10:1]};
+        $display("Time: %0t | Capturing keyb_data: %b | keyb_data_reg: %b", 
+                 $time, keyb_data, keyb_data_reg);
     end
+end
+
     
 always @(negedge keyb_data_reg[0]) begin
     scan_code <= keyb_data_reg[8:1]; // Αποθήκευση scan code
