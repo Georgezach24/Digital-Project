@@ -33,6 +33,11 @@ always @(negedge keyb_data_reg[0]) begin
     keyb_data_reg <= 11'b11111111111;
 end
 
+always @(posedge clk) begin
+    $display("Time: %0t | keyb_data: %b | keyb_data_reg: %b", 
+             $time, keyb_data, keyb_data_reg);
+end
+
 
     always @(*) begin
     case (scan_code)

@@ -66,6 +66,12 @@ endtask
         $stop;
     end
 
+    always @(posedge clk) begin
+    $display("Time: %0t | keyb_clk: %b | keyb_data: %b", 
+             $time, keyb_clk, keyb_data);
+    end
+
+
 always @(posedge clk) begin
     if (uut.scan_code !== 8'h00) begin
         $display("Time: %0t | Received scan code: %h | Decoded Number: %d | HEX Display: %b", 
