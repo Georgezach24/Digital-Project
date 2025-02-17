@@ -8,129 +8,45 @@ z2
 !i10f 100
 cModel Technology
 Z0 dC:/Users/giorg/Desktop/Modesim/Project/Digital-Project
-vcalculator
-Z1 !s110 1739528182
+vps2_keyboard_display
+!s110 1739792547
 !i10b 1
-!s100 YCH=SNRO]oI2EozaojUfc1
-IdMoj[Mk7nm[5gNCmlNPCo0
-Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s100 XUV`L:Sff7A6`hcJdzSl_1
+Igk_bZ=OniL6=VHz:4:YiG3
+Z1 VDg1SIo80bB@j0V0VzS_@n1
 R0
-w1739527556
-8C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/Calc.v
-FC:/Users/giorg/Desktop/Modesim/Project/Digital-Project/Calc.v
+w1739792389
+8C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/ps2_keyboard_display.v
+FC:/Users/giorg/Desktop/Modesim/Project/Digital-Project/ps2_keyboard_display.v
 L0 1
-Z3 OV;L;10.5b;63
+Z2 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z4 !s108 1739528182.000000
-!s107 C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/Calc.v|
-!s90 -reportprogress|300|-work|work|C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/Calc.v|
+!s108 1739792547.000000
+!s107 C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/ps2_keyboard_display.v|
+!s90 -reportprogress|300|-work|work|C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/ps2_keyboard_display.v|
 !i113 1
-Z5 o-work work
-Z6 tCvgOpt 0
-vkeyboard_display_system
-R1
+Z3 o-work work
+Z4 tCvgOpt 0
+vtb_ps2_keyboard_display
+!s110 1739793053
 !i10b 1
-!s100 1Cb^d0ZjhY4A:Oa;K8LMz2
-I]OD[20jXkL@I1DTR^REbm3
-R2
+!s100 ScLzR3nJ?EmR1H2E4P9L^1
+I5]1:HIbX<kjcho3UlbCR[3
+R1
 R0
-w1738924342
-8C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/dispSys.v
-FC:/Users/giorg/Desktop/Modesim/Project/Digital-Project/dispSys.v
+w1739792990
+8C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/ps2_tb.v
+FC:/Users/giorg/Desktop/Modesim/Project/Digital-Project/ps2_tb.v
 L0 1
-R3
-r1
-!s85 0
-31
-R4
-!s107 C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/dispSys.v|
-!s90 -reportprogress|300|-work|work|C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/dispSys.v|
-!i113 1
-R5
-R6
-vps2_keyboard
-R1
-!i10b 1
-!s100 YQK=[6LMHQfKUWoALo45Z2
-Ig>hFE>;6?X_Wkzfb?P65F2
 R2
-R0
-w1739528176
-8C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/detect.v
-FC:/Users/giorg/Desktop/Modesim/Project/Digital-Project/detect.v
-L0 1
-R3
 r1
 !s85 0
 31
-R4
-!s107 C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/detect.v|
-!s90 -reportprogress|300|-work|work|C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/detect.v|
+!s108 1739793053.000000
+!s107 C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/ps2_tb.v|
+!s90 -reportprogress|300|-work|work|C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/ps2_tb.v|
 !i113 1
-R5
-R6
-vscan_to_digit
-R1
-!i10b 1
-!s100 E4O6S1k3k<mZiLYZ4zXlG0
-IP7lzB>:0KP94[9^66R@8I0
-R2
-R0
-w1738924280
-8C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/scan.v
-FC:/Users/giorg/Desktop/Modesim/Project/Digital-Project/scan.v
-L0 1
 R3
-r1
-!s85 0
-31
 R4
-!s107 C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/scan.v|
-!s90 -reportprogress|300|-work|work|C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/scan.v|
-!i113 1
-R5
-R6
-vseven_segment_decoder
-R1
-!i10b 1
-!s100 HPKW@L@BDUk6HC2S<h@m13
-Ia::==]KJ^>Ejo_HDX<`I[0
-R2
-R0
-w1738924310
-8C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/SevenSeg.v
-FC:/Users/giorg/Desktop/Modesim/Project/Digital-Project/SevenSeg.v
-L0 2
-R3
-r1
-!s85 0
-31
-R4
-!s107 C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/SevenSeg.v|
-!s90 -reportprogress|300|-work|work|C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/SevenSeg.v|
-!i113 1
-R5
-R6
-vtb_calculator
-R1
-!i10b 1
-!s100 1FXn?G=D;k5XjU36bWSHk3
-ISSSR9NOML8a31SXJiE=^;1
-R2
-R0
-w1739528172
-8C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/Tb.v
-FC:/Users/giorg/Desktop/Modesim/Project/Digital-Project/Tb.v
-L0 3
-R3
-r1
-!s85 0
-31
-R4
-!s107 C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/Tb.v|
-!s90 -reportprogress|300|-work|work|C:/Users/giorg/Desktop/Modesim/Project/Digital-Project/Tb.v|
-!i113 1
-R5
-R6
