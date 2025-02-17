@@ -5,7 +5,6 @@ module tb_ps2_keyboard_display();
     wire [6:0] hex_display;
     
     reg keyb_clk_drive; // Χρησιμοποιείται για να οδηγήσουμε το keyb_clk
-    assign keyb_clk = keyb_clk_drive ? 1'bz : 1'b0; // Προσομοίωση inout
 
     ps2_keyboard_display uut (
         .clk(clk),
@@ -33,16 +32,18 @@ module tb_ps2_keyboard_display();
     reg [10:0] packet;
     begin
         packet = {1'b0, scan_code, 2'b11}; // Start bit, scan code, parity και stop bit
-        $display("Sending Scan Code: %h", scan_code); // DEBUG
+        $display("Sending Scan Code: %h", scan_code);
+        
         for (i = 0; i < 11; i = i + 1) begin
             keyb_data = packet[i];
-            keyb_clk_drive = 0;
+            keyb_clk_drive = 0; // Καθαρό ρολόι
             #10;
             keyb_clk_drive = 1;
             #10;
+                end
         end
-    end
-endtask
+    endtask
+
 
 
     initial begin
